@@ -5,7 +5,10 @@ type SucessModalProps = {
 export const SucessModal = ({ message }: SucessModalProps) => {
 	return (
 		<>
-			<div role="alert" className="rounded-xl border border-gray-100 bg-white p-4">
+			<div
+				role="alert"
+				className="rounded-xl border border-gray-100 bg-white p-4 dark:border-slate-400 dark:bg-slate-600"
+			>
 				<div className="flex items-start gap-4">
 					<span className="text-green-600">
 						<svg
@@ -25,9 +28,12 @@ export const SucessModal = ({ message }: SucessModalProps) => {
 					</span>
 
 					<div className="flex-1">
-						<strong className="block font-medium text-gray-900"> Changes saved </strong>
+						<strong className="block font-medium text-gray-900 dark:text-white">
+							{" "}
+							Changes saved{" "}
+						</strong>
 
-						<p className="mt-1 text-sm text-gray-700">
+						<p className="mt-1 text-sm text-gray-700 dark:text-white">
 							{message ? message : "Your product changes have been saved."}
 						</p>
 					</div>

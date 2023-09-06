@@ -9,8 +9,11 @@ export const ProductListitem = (product: ProductItemType) => {
 	} = product;
 	return (
 		<>
-			<li>
-				<Link href="#" className="group flex flex-col gap-3 rounded-lg bg-white p-3">
+			<li className="bg-accent-1/10 shadow-lg">
+				<Link
+					href={`products/${product.id}`}
+					className="group flex flex-col gap-3 rounded-lg  bg-white p-3 dark:bg-zinc-700"
+				>
 					<ProductCoverImage src={src} alt={alt} />
 					<ProductCoverDescription {...product} />
 				</Link>

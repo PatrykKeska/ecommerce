@@ -1,10 +1,12 @@
+import { SearchInput } from "@/ui/atoms/Input/SearchInput";
 import { ProductList } from "@/ui/organisms/ProductList/ProductList";
 
 const ProductsPage = () => {
 	const exmapleSrc =
 		"https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80";
 	return (
-		<main className="flex min-h-screen w-full flex-col items-center justify-between p-5 md:p-7">
+		<main className="flex min-h-screen w-full flex-col items-center justify-start gap-5 p-5 dark:bg-slate-800 md:p-7 ">
+			<SearchInput />
 			<ProductList
 				products={[
 					{

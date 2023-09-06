@@ -5,8 +5,8 @@ type FailModalProps = {
 export const FailModal = ({ message }: FailModalProps) => {
 	return (
 		<>
-			<div role="alert" className="rounded border-s-4 border-red-500 bg-red-50 p-4">
-				<div className="flex items-center gap-2 text-red-800">
+			<div role="alert" className="rounded border-s-4 border-red-500 bg-red-50 p-4 dark:bg-red-400">
+				<div className="flex items-center gap-2 text-red-800 dark:text-white">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
@@ -23,7 +23,7 @@ export const FailModal = ({ message }: FailModalProps) => {
 					<strong className="block font-medium"> Something went wrong </strong>
 				</div>
 
-				<p className="mt-2 text-sm text-red-700">
+				<p className="mt-2 text-sm text-red-700 dark:text-white">
 					{message ? message : "We can't save your changes. Please try again."}
 				</p>
 			</div>
