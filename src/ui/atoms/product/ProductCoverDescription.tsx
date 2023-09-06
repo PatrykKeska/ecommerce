@@ -1,4 +1,4 @@
-import type { ProductItemType } from "../organisms/ProductList.type";
+import type { ProductItemType } from "../../organisms/ProductList/ProductList.type";
 import { ProductRatingStar } from "./ProductRatingStar";
 import { renderStars } from "@/utils/generateStars";
 import { formatCurrency } from "@/utils/formatCurrency";
