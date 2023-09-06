@@ -1,5 +1,6 @@
 import type { ProductItemType } from "../organisms/ProductList.type";
 import { ProductRatingStar } from "./ProductRatingStar";
+import { renderStars } from "@/utils/generateStars";
 import { formatCurrency } from "@/utils/formatCurrency";
 
 export const ProductCoverDescription = ({
@@ -21,7 +22,8 @@ export const ProductCoverDescription = ({
 					<div className="mt-4 flex w-full items-center justify-between ">
 						<div className="flex items-center gap-2">
 							<p className="text-gray-900">{rating}/5</p>
-							{rating && <div className="flex">{renderStars(rating)}</div>}
+
+							{rating && <div className="flex">{renderStars(rating, <ProductRatingStar />)}</div>}
 						</div>
 						<p className="text-gray-900">${formatCurrency(price)}</p>
 					</div>
@@ -29,15 +31,4 @@ export const ProductCoverDescription = ({
 			</div>
 		</>
 	);
-};
-
-export const renderStars = (rating: number) => {
-	if (!rating) return null;
-	const stars = [];
-	if (rating % 1 >= 0.5) rating = Math.ceil(rating);
-	else rating = Math.floor(rating);
-	for (let i = 0; i < rating; i++) {
-		stars.push(<ProductRatingStar />);
-	}
-	return stars;
 };
