@@ -3,7 +3,7 @@ type SearchInputProps = {};
 export const SearchInput = ({}: SearchInputProps) => {
 	return (
 		<>
-			<div className="relative w-64 max-w-3xl md:w-1/2 lg:w-1/2">
+			<div className="relative w-64 max-w-3xl shadow-md md:w-1/2 lg:w-1/2">
 				<label htmlFor="Search" className="sr-only">
 					{" "}
 					Search{" "}
@@ -13,7 +13,7 @@ export const SearchInput = ({}: SearchInputProps) => {
 					type="text"
 					id="Search"
 					placeholder="Search for..."
-					className="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm dark:bg-slate-800 sm:text-sm"
+					className="w-full rounded-md border-gray-200  px-2.5 py-2.5 pe-10 shadow-sm dark:bg-slate-600 sm:text-sm"
 				/>
 
 				<span className="absolute inset-y-0 end-0 grid w-10 place-content-center">

@@ -1,3 +1,5 @@
+import { ClothesIcon } from "@/assets/icons/ClothesIcon";
+import { ShoesIcon } from "@/assets/icons/ShoesIcon";
 import { SearchInput } from "@/ui/atoms/Input/SearchInput";
 import { Loader } from "@/ui/atoms/Loader/Loader";
 import { ResponseModal } from "@/ui/molecules/ReponseModal";
@@ -9,6 +11,9 @@ const TestComponentsPage = () => {
 			<ResponseModal type="success" />
 			<Loader />
 			<SearchInput />
+			<ClothesIcon />
+			<ShoesIcon />
+			<div></div>
 		</section>
 	);
 };

@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<ClerkProvider>
 			<html suppressHydrationWarning className="light" style={{ colorScheme: "light" }} lang="en">
-				<body className={inter.className}>
+				<body className={`${inter.className} bg-slate-50 dark:bg-slate-800`}>
 					<Providers>
 						<Navigation />
 						{children}

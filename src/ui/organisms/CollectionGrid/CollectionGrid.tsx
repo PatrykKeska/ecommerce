@@ -4,7 +4,7 @@ export const CollectionGrid = ({}: CollectionGridProps) => {
 	return (
 		<>
 			<section>
-				<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+				<div className="mx-auto max-w-screen-lg px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
 					<header className="text-center">
 						<h2 className="text-xl font-bold text-gray-900 dark:text-white sm:text-3xl">
 							New Collection
@@ -16,7 +16,7 @@ export const CollectionGrid = ({}: CollectionGridProps) => {
 						</p>
 					</header>
 
-					<ul className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
+					<ul className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 						<li>
 							<a href="#" className="group relative block">
 								<img

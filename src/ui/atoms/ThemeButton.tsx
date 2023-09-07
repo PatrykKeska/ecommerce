@@ -2,24 +2,25 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import clsx from "clsx";
-import { DarkModeIcon } from "@/assets/icons/darkModeIcon";
-import { LightModeIcon } from "@/assets/icons/LightModeIcon";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 export const ThemeButton = () => {
 	const [isMounted, setIsMounted] = useState(false);
-	useEffect(() => setIsMounted(true), []);
-
+	const [isDarkMode, setDarkMode] = useState(false);
 	const { resolvedTheme, setTheme } = useTheme();
-	if (!isMounted) return null;
 
+	useEffect(() => setIsMounted(true), []);
+	const toggleDarkMode = (checked: boolean) => {
+		setDarkMode(checked);
+		setTheme(resolvedTheme === "dark" ? "light" : "dark");
+	};
+	if (!isMounted) return null;
 	return (
-		<button
-			className={clsx(
-				` transition-all duration-300 ease-in-out  opacity-0${isMounted && "opacity-100"}}`,
-			)}
-			onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-		>
-			{resolvedTheme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-		</button>
+		<DarkModeSwitch
+			sunColor="black"
+			moonColor="white"
+			checked={isDarkMode}
+			onChange={toggleDarkMode}
+			size={30}
+		/>
 	);
 };

@@ -9,7 +9,7 @@ type ProvidersProps = {
 const Providers = ({ children }: ProvidersProps) => {
 	return (
 		<>
-			<ThemeProvider attribute="class">{children}</ThemeProvider>;
+			<ThemeProvider attribute="class">{children}</ThemeProvider>
 		</>
 	);
 };

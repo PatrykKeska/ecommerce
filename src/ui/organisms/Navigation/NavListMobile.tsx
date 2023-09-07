@@ -9,9 +9,9 @@ type NavListMobileType = {
 
 export const NavListMobile = ({ item }: NavListMobileType) => {
 	return (
-		<ul className="md:hidden">
-			{item.map(({ href, label, active }) => (
-				<NavListItem key={href} mobile item={{ active, href, label }} />
+		<ul>
+			{item.map((item) => (
+				<NavListItem key={item.href} mobile item={item} />
 			))}
 		</ul>
 	);
