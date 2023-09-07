@@ -1,7 +1,7 @@
 "use client";
 
 import { type NavListItemType } from "./NavItems.type";
-import { NavListItem } from "@/ui/atoms/NavListItem/NavListItem";
+import { NavListItem } from "@/ui/atoms/Navigation/NavListItem";
 
 type NavListMobileType = {
 	item: NavListItemType[];
