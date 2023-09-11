@@ -5,7 +5,7 @@ type ProductReviewsProps = {};
 export const ProductReviews = ({}: ProductReviewsProps) => {
 	return (
 		<>
-			<section className="bg-white shadow-md dark:bg-zinc-600">
+			<section className="bg-white  dark:bg-zinc-600">
 				<div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
 					<h2 className="text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
 						Read trusted reviews from our customers

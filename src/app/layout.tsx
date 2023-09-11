@@ -1,3 +1,4 @@
+import "server-only";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -16,11 +17,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<ClerkProvider>
 			<html suppressHydrationWarning className="light" style={{ colorScheme: "light" }} lang="en">
-				<body className={`${inter.className} bg-slate-50 dark:bg-slate-800`}>
-					<Providers>
-						<Navigation />
-						{children}
-					</Providers>
+				<body className={`${inter.className} `}>
+					<main className="mx-auto w-full">
+						<Providers>
+							<Navigation />
+							{children}
+						</Providers>
+					</main>
 				</body>
 			</html>
 		</ClerkProvider>

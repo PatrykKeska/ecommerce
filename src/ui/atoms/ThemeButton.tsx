@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 export const ThemeButton = () => {
 	const [isMounted, setIsMounted] = useState(false);
-	const [isDarkMode, setDarkMode] = useState(false);
 	const { resolvedTheme, setTheme } = useTheme();
+
+	const [isDarkMode, setDarkMode] = useState(resolvedTheme === "dark" ? true : false);
 
 	useEffect(() => setIsMounted(true), []);
 	const toggleDarkMode = (checked: boolean) => {
@@ -14,6 +15,7 @@ export const ThemeButton = () => {
 		setTheme(resolvedTheme === "dark" ? "light" : "dark");
 	};
 	if (!isMounted) return null;
+
 	return (
 		<DarkModeSwitch
 			sunColor="black"
