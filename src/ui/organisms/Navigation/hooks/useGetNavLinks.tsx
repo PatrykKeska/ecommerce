@@ -52,7 +52,7 @@ export const useGetNavLinks = () => {
 	useEffect(() => {
 		setNavLinks((prev) => {
 			return prev.map((item) => {
-				if (item.href === pathname) {
+				if (item.href === pathname || (pathname.includes(item.href) && item.href !== "/")) {
 					item.active = true;
 				} else {
 					item.active = false;

@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { ProductReviews } from "@/ui/organisms/ProductReviews/ProductReviews";
 import { CheckIcon } from "@/assets/icons/CheckIcon";
 import { OutofStockIcon } from "@/assets/icons/OutofStockIcon";
+import { getProductDetails } from "@/api/getProductDetails";
+import { type ApiProduct } from "@/api/getProducts";
 
 type ProductDetailsPageType = {
 	params: {
@@ -14,16 +16,28 @@ type ProductDetailsPageType = {
 
 const ProductDetailsPage = ({ params: { slug } }: ProductDetailsPageType) => {
 	const [readMore, setReadMore] = useState(false);
+	const [product, setProduct] = useState<ApiProduct | null>(null);
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			const res = await getProductDetails(slug);
+			setProduct(res);
+		};
+		void fetchProduct();
+	}, []);
+
+	console.log(product);
 
 	const isStock = false;
-	console.log(slug);
+	if (!product) return null;
+	const { description, image, price, title } = product;
 	return (
 		<>
 			<section className="mx-auto mb-10 mt-10 flex flex-col gap-10 md:flex-row">
 				<div>
 					<div className="relative h-72 w-full max-w-md lg:h-96">
 						<Image
-							src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+							src={image}
 							alt="Picture of the author"
 							fill
 							className="inset-0 h-full w-full rounded-md object-cover object-center shadow-xl"
@@ -31,59 +45,29 @@ const ProductDetailsPage = ({ params: { slug } }: ProductDetailsPageType) => {
 					</div>
 					<section className="flex h-32 max-w-md gap-3 overflow-x-scroll md:max-w-sm">
 						<div className="relative mt-4 h-24 w-24 flex-none">
-							<Image
-								src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-								alt="Picture of the author"
-								fill
-								className="w-full object-cover"
-							/>
+							<Image src={image} alt="Picture of the author" fill className="w-full object-cover" />
 						</div>
 						<div className="relative mt-4 h-24 w-24 flex-none">
-							<Image
-								src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-								alt="Picture of the author"
-								fill
-								className="object-cover"
-							/>
+							<Image src={image} alt="Picture of the author" fill className="object-cover" />
 						</div>
 						<div className="relative mt-4 h-24 w-24 flex-none">
-							<Image
-								src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-								alt="Picture of the author"
-								fill
-								className="object-cover"
-							/>
+							<Image src={image} alt="Picture of the author" fill className="object-cover" />
 						</div>
 						<div className="relative mt-4 h-24 w-24 flex-none">
-							<Image
-								src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-								alt="Picture of the author"
-								fill
-								className="object-cover"
-							/>
+							<Image src={image} alt="Picture of the author" fill className="object-cover" />
 						</div>
 						<div className="relative mt-4 h-24 w-24 flex-none">
-							<Image
-								src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-								alt="Picture of the author"
-								fill
-								className="object-cover"
-							/>
+							<Image src={image} alt="Picture of the author" fill className="object-cover" />
 						</div>
 						<div className="relative mt-4 h-24 w-24 flex-none">
-							<Image
-								src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-								alt="Picture of the author"
-								fill
-								className="object-cover"
-							/>
+							<Image src={image} alt="Picture of the author" fill className="object-cover" />
 						</div>
 					</section>
 				</div>
 				<article className="flex w-full max-w-md flex-col gap-2 md:w-1/2">
-					<h1 className="text-left text-2xl font-bold">Headphones</h1>
+					<h1 className="text-left text-2xl font-bold">{title}</h1>
 					<p className="text-md font-bold">
-						Price: <span className="font-normal text-green-500">49.99 $</span>
+						Price: <span className="font-normal text-green-500">{price / 100} $</span>
 					</p>
 					<p>
 						<strong className="flex items-center gap-2">
@@ -91,17 +75,8 @@ const ProductDetailsPage = ({ params: { slug } }: ProductDetailsPageType) => {
 						</strong>
 					</p>
 					<p className={clsx(`${!readMore && "truncate"} max-h-80  overflow-y-scroll pr-10`)}>
-						<strong>Description: </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Quisquam, aspernatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-						aspernatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-						aspernatur. amet consectetur adipisicing elit. Quisquam, aspernatur. Lorem ipsum dolor
-						sit amet consectetur adipisicing elit. Quisquam, aspernatur. Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Quisquam, aspernatur. amet consectetur adipisicing elit.
-						Quisquam, aspernatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-						aspernatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-						aspernatur. amet consectetur adipisicing elit. Quisquam, aspernatur. Lorem ipsum dolor
-						sit amet consectetur adipisicing elit. Quisquam, aspernatur. Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Quisquam, aspernatur.
+						<strong>Description: </strong>
+						{description}
 					</p>
 					<span onClick={() => setReadMore(!readMore)} role="button" className="italic underline">
 						{readMore ? "collapse" : "read more"}

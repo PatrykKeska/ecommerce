@@ -1,7 +1,7 @@
-import { type ProductItemType } from "./ProductList.type";
+import { type ApiProduct } from "@/api/getProducts";
 import { ProductListitem } from "@/ui/molecules/ProductListItem";
 
-export const ProductList = ({ products }: { products: ProductItemType[] }) => {
+export const ProductList = ({ products }: { products: ApiProduct[] }) => {
 	return (
 		<>
 			<ul
