@@ -5,7 +5,7 @@ const nextConfig = {
 		mdxRs: true,
 	},
 	images: {
-		domains: ["images.unsplash.com", "naszsklep-api.vercel.app"],
+		domains: ["images.unsplash.com", "naszsklep-api.vercel.app", "cloudinary.com"],
 	},
 };
 

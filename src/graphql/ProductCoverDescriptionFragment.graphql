@@ -1,0 +1,18 @@
+fragment ProductCoverDescription on Product {
+	productName
+	productPrice
+	reviews {
+		data {
+			attributes {
+				reviewRate
+			}
+		}
+	}
+	category {
+		data {
+			attributes {
+				categoryName
+			}
+		}
+	}
+}

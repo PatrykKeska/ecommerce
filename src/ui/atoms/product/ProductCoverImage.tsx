@@ -1,19 +1,19 @@
 import Image from "next/image";
 
-type ProductCoverImageProps = {
+type ProductCoverImageType = {
+	url: string | undefined;
 	alt: string;
-	src: string;
 };
 
-export const ProductCoverImage = ({ alt, src }: ProductCoverImageProps) => {
+export const ProductCoverImage = ({ url, alt }: ProductCoverImageType) => {
 	return (
 		<>
-			<div className="relative h-52 w-60 overflow-hidden md:h-64 md:w-72">
+			<div className="overflow-hiddenmd:h-64 relative h-52 w-full md:w-72">
 				<Image
-					className="object-contain transition-all duration-300 ease-in-out group-hover:scale-110"
+					className="rounded-sm bg-white object-cover transition-all duration-300 ease-in-out group-hover:scale-105"
 					fill={true}
 					unoptimized={true}
-					src={src}
+					src={url ? url : "/images/placeholder.png"}
 					alt={alt}
 				/>
 			</div>

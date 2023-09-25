@@ -1,16 +1,16 @@
-import { type ApiProduct } from "@/api/getProducts";
+import { type ProductGetListQuery } from "@/gql/graphql";
 import { ProductListitem } from "@/ui/molecules/ProductListItem";
 
-export const ProductList = ({ products }: { products: ApiProduct[] }) => {
+export const ProductList = ({ products }: ProductGetListQuery) => {
 	return (
 		<>
 			<ul
 				data-testid="products-list"
 				className="grid  grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
 			>
-				{products.map((product) => (
-					<ProductListitem key={product.id} {...product} />
-				))}
+				{products?.data.map((product) => {
+					return <ProductListitem key={product.attributes?.slug} {...product} />;
+				})}
 			</ul>
 		</>
 	);

@@ -1,0 +1,29 @@
+fragment ProductListDetails on ProductEntity {
+	attributes {
+		productName
+		productPrice
+		productID
+		reviews {
+			data {
+				attributes {
+					reviewRate
+				}
+			}
+		}
+		slug
+		category {
+			data {
+				attributes {
+					categoryName
+				}
+			}
+		}
+		productImageCover {
+			data {
+				attributes {
+					url
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,32 @@
+query ProductGetList {
+	products(pagination: { pageSize: 50 }) {
+		data {
+			attributes {
+				productName
+				productPrice
+				slug
+				reviews {
+					data {
+						attributes {
+							reviewRate
+						}
+					}
+				}
+				category {
+					data {
+						attributes {
+							categoryName
+						}
+					}
+				}
+				productImageCover {
+					data {
+						attributes {
+							url
+						}
+					}
+				}
+			}
+		}
+	}
+}
