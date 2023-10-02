@@ -1,21 +1,18 @@
-query ProductsGetAllListPagination($page: Int!) {
-	products(sort: "id:asc", pagination: { page: $page, pageSize: 10 }) {
+query ProudctGetDetails($slug: String!) {
+	products(filters: { slug: { eq: $slug } }) {
 		data {
 			attributes {
 				productName
 				productPrice
-				slug
+				stock
+				productDescription
 				reviews {
 					data {
 						attributes {
 							reviewRate
-						}
-					}
-				}
-				category {
-					data {
-						attributes {
-							categoryName
+							reviewTitle
+							reviewDescription
+							userName
 						}
 					}
 				}

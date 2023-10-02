@@ -1,0 +1,12 @@
+query PaginationGetDetails {
+	products {
+		meta {
+			pagination {
+				total
+				page
+				pageSize
+				pageCount
+			}
+		}
+	}
+}

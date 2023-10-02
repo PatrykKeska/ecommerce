@@ -655,6 +655,7 @@ export type Product = {
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   reviews?: Maybe<ReviewRelationResponseCollection>;
   slug: Scalars['String']['output'];
+  stock: Scalars['Boolean']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -694,6 +695,7 @@ export type ProductFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   reviews?: InputMaybe<ReviewFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
+  stock?: InputMaybe<BooleanFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
@@ -707,6 +709,7 @@ export type ProductInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   reviews?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
+  stock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type ProductRelationResponseCollection = {
@@ -1299,7 +1302,19 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type PaginationGetDetailsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PaginationGetDetailsQuery = { products?: { meta: { pagination: { total: number, page: number, pageSize: number, pageCount: number } } } | null };
+
 export type ProductCoverDescriptionFragment = { productName: string, productPrice: number, reviews?: { data: Array<{ attributes?: { reviewRate: number } | null }> } | null, category?: { data?: { attributes?: { categoryName: string } | null } | null } | null } & { ' $fragmentName'?: 'ProductCoverDescriptionFragment' };
+
+export type ProudctGetDetailsQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type ProudctGetDetailsQuery = { products?: { data: Array<{ attributes?: { productName: string, productPrice: number, stock: boolean, productDescription: string, reviews?: { data: Array<{ attributes?: { reviewRate: number, reviewTitle: string, reviewDescription?: string | null, userName: string } | null }> } | null, productImageCover: { data?: { attributes?: { url: string } | null } | null } } | null }> } | null };
 
 export type ProductGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1309,12 +1324,11 @@ export type ProductGetListQuery = { products?: { data: Array<{ attributes?: { pr
 export type ProductListDetailsFragment = { attributes?: { productName: string, productPrice: number, productID?: string | null, slug: string, reviews?: { data: Array<{ attributes?: { reviewRate: number } | null }> } | null, category?: { data?: { attributes?: { categoryName: string } | null } | null } | null, productImageCover: { data?: { attributes?: { url: string } | null } | null } } | null } & { ' $fragmentName'?: 'ProductListDetailsFragment' };
 
 export type ProductsGetAllListPaginationQueryVariables = Exact<{
-  start: Scalars['Int']['input'];
-  limit: Scalars['Int']['input'];
+  page: Scalars['Int']['input'];
 }>;
 
 
-export type ProductsGetAllListPaginationQuery = { products?: { data: Array<{ attributes?: { productName: string } | null }>, meta: { pagination: { total: number, page: number, pageCount: number, pageSize: number } } } | null };
+export type ProductsGetAllListPaginationQuery = { products?: { data: Array<{ attributes?: { productName: string, productPrice: number, slug: string, reviews?: { data: Array<{ attributes?: { reviewRate: number } | null }> } | null, category?: { data?: { attributes?: { categoryName: string } | null } | null } | null, productImageCover: { data?: { attributes?: { url: string } | null } | null } } | null }> } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -1381,6 +1395,51 @@ export const ProductListDetailsFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductListDetails"}) as unknown as TypedDocumentString<ProductListDetailsFragment, unknown>;
+export const PaginationGetDetailsDocument = new TypedDocumentString(`
+    query PaginationGetDetails {
+  products {
+    meta {
+      pagination {
+        total
+        page
+        pageSize
+        pageCount
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<PaginationGetDetailsQuery, PaginationGetDetailsQueryVariables>;
+export const ProudctGetDetailsDocument = new TypedDocumentString(`
+    query ProudctGetDetails($slug: String!) {
+  products(filters: {slug: {eq: $slug}}) {
+    data {
+      attributes {
+        productName
+        productPrice
+        stock
+        productDescription
+        reviews {
+          data {
+            attributes {
+              reviewRate
+              reviewTitle
+              reviewDescription
+              userName
+            }
+          }
+        }
+        productImageCover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProudctGetDetailsQuery, ProudctGetDetailsQueryVariables>;
 export const ProductGetListDocument = new TypedDocumentString(`
     query ProductGetList {
   products(pagination: {pageSize: 50}) {
@@ -1416,19 +1475,34 @@ export const ProductGetListDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<ProductGetListQuery, ProductGetListQueryVariables>;
 export const ProductsGetAllListPaginationDocument = new TypedDocumentString(`
-    query ProductsGetAllListPagination($start: Int!, $limit: Int!) {
-  products(sort: "id:asc", pagination: {start: $start, limit: $limit}) {
+    query ProductsGetAllListPagination($page: Int!) {
+  products(sort: "id:asc", pagination: {page: $page, pageSize: 10}) {
     data {
       attributes {
         productName
-      }
-    }
-    meta {
-      pagination {
-        total
-        page
-        pageCount
-        pageSize
+        productPrice
+        slug
+        reviews {
+          data {
+            attributes {
+              reviewRate
+            }
+          }
+        }
+        category {
+          data {
+            attributes {
+              categoryName
+            }
+          }
+        }
+        productImageCover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
       }
     }
   }

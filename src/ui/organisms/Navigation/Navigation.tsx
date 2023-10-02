@@ -46,9 +46,7 @@ export const Navigation = () => {
 									<ArrowLeftIcon />
 								</button>
 
-								{navLinks.map((item) => (
-									<NavListItem key={item.href} item={item} />
-								))}
+								{navLinks?.map((item) => <NavListItem key={item.href} item={item} />)}
 								<button onClick={scrollRight} className="sticky right-4 z-30 px-10 py-5">
 									<ArrowRightIcon />
 								</button>
@@ -76,7 +74,7 @@ export const Navigation = () => {
 					leaveTo="-translate-x-full"
 				>
 					<nav className=" absolute z-20 w-full bg-slate-50 pb-3 shadow-xl dark:bg-slate-600 md:hidden">
-						<NavListMobile item={navLinks} />
+						<NavListMobile item={navLinks!} />
 					</nav>
 				</Transition>
 			</header>
