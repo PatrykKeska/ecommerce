@@ -1,0 +1,12 @@
+query PaginationGetCategoriesDetails($category: String!) {
+	products(filters: { category: { categoryName: { eq: $category } } }) {
+		meta {
+			pagination {
+				total
+				page
+				pageSize
+				pageCount
+			}
+		}
+	}
+}

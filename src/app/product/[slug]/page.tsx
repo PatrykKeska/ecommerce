@@ -1,11 +1,12 @@
 import Image from "next/image";
 import clsx from "clsx";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { notFound } from "next/navigation";
+import { loadEnvConfig } from "@next/env";
 import { ProductReviews } from "@/ui/organisms/ProductReviews/ProductReviews";
 import { CheckIcon } from "@/assets/icons/CheckIcon";
 import { OutofStockIcon } from "@/assets/icons/OutofStockIcon";
 import { getProductDetails } from "@/api/getProductDetails";
-
 type ProductDetailsPageType = {
 	params: {
 		slug: string;
@@ -14,10 +15,14 @@ type ProductDetailsPageType = {
 
 const ProductDetailsPage = async ({ params: { slug } }: ProductDetailsPageType) => {
 	const response = await getProductDetails(slug);
-	if (!response.products?.data[0]?.attributes) return <h1>somenthing went wrong!</h1>;
+	const productDetails = response.products?.data[0]?.attributes;
+	loadEnvConfig(process.cwd());
+	if (!productDetails) {
+		throw notFound();
+	}
+
 	const { productName, productDescription, productImageCover, productPrice, stock } =
-		response.products?.data[0]?.attributes;
-	if (!productImageCover.data?.attributes?.url) return <h1>somenthing went wrong!</h1>;
+		productDetails;
 
 	return (
 		<>
@@ -25,42 +30,18 @@ const ProductDetailsPage = async ({ params: { slug } }: ProductDetailsPageType) 
 				<div>
 					<div className="relative w-full max-w-md">
 						<Image
-							src={productImageCover.data?.attributes?.url}
+							src={
+								productImageCover.data?.attributes?.url
+									? productImageCover.data?.attributes?.url
+									: `${process.env.NEXT_PUBLIC_PUBLIC_URL}/loader.avif`
+							}
 							alt="Picture of the author"
 							width={700}
 							height={400}
 							quality={100}
-							// fill
 							className="inset-0 h-full w-full rounded-md object-cover object-center shadow-xl"
 						/>
 					</div>
-					{/* <Suspense>
-						<section className="flex h-32 max-w-md gap-3 overflow-x-scroll md:max-w-sm">
-							<div className="relative mt-4 h-24 w-24 flex-none">
-								<Image
-									src={image}
-									alt="Picture of the author"
-									fill
-									className="w-full object-cover"
-								/>
-							</div>
-							<div className="relative mt-4 h-24 w-24 flex-none">
-								<Image src={image} alt="Picture of the author" fill className="object-cover" />
-							</div>
-							<div className="relative mt-4 h-24 w-24 flex-none">
-								<Image src={image} alt="Picture of the author" fill className="object-cover" />
-							</div>
-							<div className="relative mt-4 h-24 w-24 flex-none">
-								<Image src={image} alt="Picture of the author" fill className="object-cover" />
-							</div>
-							<div className="relative mt-4 h-24 w-24 flex-none">
-								<Image src={image} alt="Picture of the author" fill className="object-cover" />
-							</div>
-							<div className="relative mt-4 h-24 w-24 flex-none">
-								<Image src={image} alt="Picture of the author" fill className="object-cover" />
-							</div>
-						</section>
-					</Suspense> */}
 				</div>
 				<article className="flex w-full max-w-md flex-col gap-2 md:w-1/2">
 					<h1 className="text-left text-2xl font-bold">{productName}</h1>

@@ -1,0 +1,35 @@
+query CategoryProductsGetPaginatedList($category: String!, $page: Int!) {
+	products(
+		filters: { category: { categoryName: { eq: $category } } }
+		pagination: { page: $page, pageSize: 10 }
+	) {
+		data {
+			attributes {
+				productName
+				productPrice
+				slug
+				reviews {
+					data {
+						attributes {
+							reviewRate
+						}
+					}
+				}
+				category {
+					data {
+						attributes {
+							categoryName
+						}
+					}
+				}
+				productImageCover {
+					data {
+						attributes {
+							url
+						}
+					}
+				}
+			}
+		}
+	}
+}

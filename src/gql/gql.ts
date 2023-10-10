@@ -14,6 +14,8 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "query CategoryProductsGetPaginatedList($category: String!, $page: Int!) {\n  products(\n    filters: {category: {categoryName: {eq: $category}}}\n    pagination: {page: $page, pageSize: 10}\n  ) {\n    data {\n      attributes {\n        productName\n        productPrice\n        slug\n        reviews {\n          data {\n            attributes {\n              reviewRate\n            }\n          }\n        }\n        category {\n          data {\n            attributes {\n              categoryName\n            }\n          }\n        }\n        productImageCover {\n          data {\n            attributes {\n              url\n            }\n          }\n        }\n      }\n    }\n  }\n}": types.CategoryProductsGetPaginatedListDocument,
+    "query PaginationGetCategoriesDetails($category: String!) {\n  products(filters: {category: {categoryName: {eq: $category}}}) {\n    meta {\n      pagination {\n        total\n        page\n        pageSize\n        pageCount\n      }\n    }\n  }\n}": types.PaginationGetCategoriesDetailsDocument,
     "query PaginationGetDetails {\n  products {\n    meta {\n      pagination {\n        total\n        page\n        pageSize\n        pageCount\n      }\n    }\n  }\n}": types.PaginationGetDetailsDocument,
     "fragment ProductCoverDescription on Product {\n  productName\n  productPrice\n  reviews {\n    data {\n      attributes {\n        reviewRate\n      }\n    }\n  }\n  category {\n    data {\n      attributes {\n        categoryName\n      }\n    }\n  }\n}": types.ProductCoverDescriptionFragmentDoc,
     "query ProudctGetDetails($slug: String!) {\n  products(filters: {slug: {eq: $slug}}) {\n    data {\n      attributes {\n        productName\n        productPrice\n        stock\n        productDescription\n        reviews {\n          data {\n            attributes {\n              reviewRate\n              reviewTitle\n              reviewDescription\n              userName\n            }\n          }\n        }\n        productImageCover {\n          data {\n            attributes {\n              url\n            }\n          }\n        }\n      }\n    }\n  }\n}": types.ProudctGetDetailsDocument,
@@ -22,6 +24,14 @@ const documents = {
     "query ProductsGetAllListPagination($page: Int!) {\n  products(sort: \"id:asc\", pagination: {page: $page, pageSize: 10}) {\n    data {\n      attributes {\n        productName\n        productPrice\n        slug\n        reviews {\n          data {\n            attributes {\n              reviewRate\n            }\n          }\n        }\n        category {\n          data {\n            attributes {\n              categoryName\n            }\n          }\n        }\n        productImageCover {\n          data {\n            attributes {\n              url\n            }\n          }\n        }\n      }\n    }\n  }\n}": types.ProductsGetAllListPaginationDocument,
 };
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query CategoryProductsGetPaginatedList($category: String!, $page: Int!) {\n  products(\n    filters: {category: {categoryName: {eq: $category}}}\n    pagination: {page: $page, pageSize: 10}\n  ) {\n    data {\n      attributes {\n        productName\n        productPrice\n        slug\n        reviews {\n          data {\n            attributes {\n              reviewRate\n            }\n          }\n        }\n        category {\n          data {\n            attributes {\n              categoryName\n            }\n          }\n        }\n        productImageCover {\n          data {\n            attributes {\n              url\n            }\n          }\n        }\n      }\n    }\n  }\n}"): typeof import('./graphql').CategoryProductsGetPaginatedListDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query PaginationGetCategoriesDetails($category: String!) {\n  products(filters: {category: {categoryName: {eq: $category}}}) {\n    meta {\n      pagination {\n        total\n        page\n        pageSize\n        pageCount\n      }\n    }\n  }\n}"): typeof import('./graphql').PaginationGetCategoriesDetailsDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1302,6 +1302,21 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type CategoryProductsGetPaginatedListQueryVariables = Exact<{
+  category: Scalars['String']['input'];
+  page: Scalars['Int']['input'];
+}>;
+
+
+export type CategoryProductsGetPaginatedListQuery = { products?: { data: Array<{ attributes?: { productName: string, productPrice: number, slug: string, reviews?: { data: Array<{ attributes?: { reviewRate: number } | null }> } | null, category?: { data?: { attributes?: { categoryName: string } | null } | null } | null, productImageCover: { data?: { attributes?: { url: string } | null } | null } } | null }> } | null };
+
+export type PaginationGetCategoriesDetailsQueryVariables = Exact<{
+  category: Scalars['String']['input'];
+}>;
+
+
+export type PaginationGetCategoriesDetailsQuery = { products?: { meta: { pagination: { total: number, page: number, pageSize: number, pageCount: number } } } | null };
+
 export type PaginationGetDetailsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1395,6 +1410,57 @@ export const ProductListDetailsFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductListDetails"}) as unknown as TypedDocumentString<ProductListDetailsFragment, unknown>;
+export const CategoryProductsGetPaginatedListDocument = new TypedDocumentString(`
+    query CategoryProductsGetPaginatedList($category: String!, $page: Int!) {
+  products(
+    filters: {category: {categoryName: {eq: $category}}}
+    pagination: {page: $page, pageSize: 10}
+  ) {
+    data {
+      attributes {
+        productName
+        productPrice
+        slug
+        reviews {
+          data {
+            attributes {
+              reviewRate
+            }
+          }
+        }
+        category {
+          data {
+            attributes {
+              categoryName
+            }
+          }
+        }
+        productImageCover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CategoryProductsGetPaginatedListQuery, CategoryProductsGetPaginatedListQueryVariables>;
+export const PaginationGetCategoriesDetailsDocument = new TypedDocumentString(`
+    query PaginationGetCategoriesDetails($category: String!) {
+  products(filters: {category: {categoryName: {eq: $category}}}) {
+    meta {
+      pagination {
+        total
+        page
+        pageSize
+        pageCount
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<PaginationGetCategoriesDetailsQuery, PaginationGetCategoriesDetailsQueryVariables>;
 export const PaginationGetDetailsDocument = new TypedDocumentString(`
     query PaginationGetDetails {
   products {

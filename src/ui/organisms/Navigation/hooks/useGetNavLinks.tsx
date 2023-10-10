@@ -24,39 +24,39 @@ const navItems = [
 		icon: <AllIcon />,
 	},
 	{
-		label: "Sweters",
-		href: "/category/sweters",
+		label: "Sweaters",
+		href: "/swetears/1",
 		active: false,
 		icon: <ClothesIcon />,
 	},
 	{
 		label: "Pants",
-		href: "/category/pants",
+		href: "/pants/1",
 		active: false,
 		icon: <PantsIcon />,
 	},
 	{
 		label: "T-Shirts",
-		href: "/category/t-shirts",
+		href: "/t-shirts/1",
 		active: false,
 		icon: <TshirtIcon />,
 	},
 	{
 		label: "Shirts",
-		href: "/category/shirts",
+		href: "/shirts/1",
 		active: false,
 		icon: <ShirtIcon />,
 	},
 
 	{
 		label: "Shoes",
-		href: "/category/shoes",
+		href: "/shoes/1",
 		active: false,
 		icon: <ShoesIcon />,
 	},
 	{
 		label: "Electonics",
-		href: "/category/electonics",
+		href: "/electronics/1",
 		active: false,
 		icon: <ElectronicsIcon />,
 	},
@@ -74,8 +74,6 @@ export const useGetNavLinks = () => {
 	useEffect(() => {
 		setNavLinks((prev) => {
 			return prev.map((item) => {
-				// /products/should handle all numbers here and not just 1
-
 				if (item.href === pathname || (pathname.includes(item.href) && item.href !== "/")) {
 					item.active = true;
 				} else {
