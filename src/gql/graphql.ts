@@ -1324,6 +1324,8 @@ export type PaginationGetDetailsQuery = { products?: { meta: { pagination: { tot
 
 export type ProductCoverDescriptionFragment = { productName: string, productPrice: number, reviews?: { data: Array<{ attributes?: { reviewRate: number } | null }> } | null, category?: { data?: { attributes?: { categoryName: string } | null } | null } | null } & { ' $fragmentName'?: 'ProductCoverDescriptionFragment' };
 
+export type ProductDetailsFragment = { productName: string, productPrice: number, productDescription: string, stock: boolean, productImageCover: { data?: { attributes?: { url: string } | null } | null } } & { ' $fragmentName'?: 'ProductDetailsFragment' };
+
 export type ProudctGetDetailsQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
@@ -1379,6 +1381,22 @@ export const ProductCoverDescriptionFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductCoverDescription"}) as unknown as TypedDocumentString<ProductCoverDescriptionFragment, unknown>;
+export const ProductDetailsFragmentDoc = new TypedDocumentString(`
+    fragment ProductDetails on Product {
+  productName
+  productPrice
+  productPrice
+  productDescription
+  stock
+  productImageCover {
+    data {
+      attributes {
+        url
+      }
+    }
+  }
+}
+    `, {"fragmentName":"ProductDetails"}) as unknown as TypedDocumentString<ProductDetailsFragment, unknown>;
 export const ProductListDetailsFragmentDoc = new TypedDocumentString(`
     fragment ProductListDetails on ProductEntity {
   attributes {
