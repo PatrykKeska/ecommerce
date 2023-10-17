@@ -8,7 +8,7 @@ type ProductCoverImageType = {
 export const ProductCoverImage = ({ url, alt }: ProductCoverImageType) => {
 	return (
 		<>
-			<div className="overflow-hiddenmd:h-64 relative h-52 w-full md:w-72">
+			<div className="relative h-52 w-full overflow-hidden md:h-64 md:w-72">
 				<Image
 					className="rounded-sm bg-white object-cover transition-all duration-300 ease-in-out group-hover:scale-105"
 					fill={true}
