@@ -1,4 +1,4 @@
-import Image from "next/image";
+import NextImage from "next/image";
 
 type ProductReviewsProps = {};
 
@@ -15,10 +15,12 @@ export const ProductReviews = ({}: ProductReviewsProps) => {
 						<blockquote className="rounded-lg bg-gray-50 p-6 shadow-lg dark:bg-slate-700 sm:p-8">
 							<div className="flex items-center gap-4">
 								<div className="relative h-14 w-14">
-									<Image
+									<NextImage
 										alt="Man"
 										className="absolute inset-0 h-full w-full rounded-full object-cover"
 										fill
+										sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+										quality={80}
 										src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
 									/>
 								</div>

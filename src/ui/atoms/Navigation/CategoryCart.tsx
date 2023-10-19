@@ -1,4 +1,4 @@
-import Image from "next/image";
+import NextImage from "next/image";
 import Link from "next/link";
 type CategoryCartProps = {
 	pathname: string;
@@ -12,10 +12,11 @@ export const CategoryCart = ({ pathname, coverImage, label }: CategoryCartProps)
 			<li className="group" key={pathname}>
 				<Link href={{ pathname: pathname }}>
 					<div className="relative h-80 w-full max-w-2xl overflow-hidden rounded-md md:h-80 lg:h-96 ">
-						<Image
+						<NextImage
 							className="rounded-sm bg-white object-cover transition-all duration-300 ease-in-out group-hover:rotate-3 group-hover:scale-110"
 							fill={true}
-							unoptimized={true}
+							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+							quality={80}
 							src={coverImage}
 							alt={label}
 						/>

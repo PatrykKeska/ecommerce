@@ -12,7 +12,8 @@ export const ProductCoverImage = ({ url, alt }: ProductCoverImageType) => {
 				<Image
 					className="rounded-sm bg-white object-cover transition-all duration-300 ease-in-out group-hover:scale-105"
 					fill={true}
-					unoptimized={true}
+					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+					quality={80}
 					src={url ? url : "/images/placeholder.png"}
 					alt={alt}
 				/>

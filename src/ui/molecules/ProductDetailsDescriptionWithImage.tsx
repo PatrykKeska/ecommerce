@@ -1,4 +1,4 @@
-import Image from "next/image";
+import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import { ProductDetailsDescription } from "../atoms/product/ProductDetailsDescription";
 import { type ProductDetailsFragment } from "@/gql/graphql";
@@ -26,7 +26,7 @@ export const ProductDetailsDescriptionWithImage = ({
 			<section className="mx-auto mb-10 mt-10 flex flex-col gap-10 md:flex-row">
 				<div>
 					<div className="r relative aspect-square w-full md:max-w-md">
-						<Image
+						<NextImage
 							src={
 								productImageCover.data?.attributes?.url
 									? productImageCover.data?.attributes?.url
@@ -35,7 +35,8 @@ export const ProductDetailsDescriptionWithImage = ({
 							alt="Picture of the author"
 							width={700}
 							height={400}
-							quality={100}
+							quality={80}
+							priority={true}
 							className="inset-0 h-full w-full rounded-md object-cover object-center shadow-xl"
 						/>
 					</div>
