@@ -5,6 +5,7 @@ query ProudctGetDetails($slug: String!) {
 				productName
 				productPrice
 				stock
+				slug
 				productDescription
 				reviews {
 					data {

@@ -1302,6 +1302,11 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type CategoriesGetDetailsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CategoriesGetDetailsQuery = { categories?: { data: Array<{ attributes?: { categoryName: string, products?: { data: Array<{ attributes?: { productImageCover: { data?: { attributes?: { url: string } | null } | null } } | null }> } | null } | null }> } | null };
+
 export type CategoryProductsGetPaginatedListQueryVariables = Exact<{
   category: Scalars['String']['input'];
   page: Scalars['Int']['input'];
@@ -1324,14 +1329,14 @@ export type PaginationGetDetailsQuery = { products?: { meta: { pagination: { tot
 
 export type ProductCoverDescriptionFragment = { productName: string, productPrice: number, reviews?: { data: Array<{ attributes?: { reviewRate: number } | null }> } | null, category?: { data?: { attributes?: { categoryName: string } | null } | null } | null } & { ' $fragmentName'?: 'ProductCoverDescriptionFragment' };
 
-export type ProductDetailsFragment = { productName: string, productPrice: number, productDescription: string, stock: boolean, productImageCover: { data?: { attributes?: { url: string } | null } | null } } & { ' $fragmentName'?: 'ProductDetailsFragment' };
+export type ProductDetailsFragment = { productName: string, productPrice: number, productDescription: string, slug: string, stock: boolean, productImageCover: { data?: { attributes?: { url: string } | null } | null } } & { ' $fragmentName'?: 'ProductDetailsFragment' };
 
 export type ProudctGetDetailsQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type ProudctGetDetailsQuery = { products?: { data: Array<{ attributes?: { productName: string, productPrice: number, stock: boolean, productDescription: string, reviews?: { data: Array<{ attributes?: { reviewRate: number, reviewTitle: string, reviewDescription?: string | null, userName: string } | null }> } | null, productImageCover: { data?: { attributes?: { url: string } | null } | null } } | null }> } | null };
+export type ProudctGetDetailsQuery = { products?: { data: Array<{ attributes?: { productName: string, productPrice: number, stock: boolean, slug: string, productDescription: string, reviews?: { data: Array<{ attributes?: { reviewRate: number, reviewTitle: string, reviewDescription?: string | null, userName: string } | null }> } | null, productImageCover: { data?: { attributes?: { url: string } | null } | null } } | null }> } | null };
 
 export type ProductGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1387,6 +1392,7 @@ export const ProductDetailsFragmentDoc = new TypedDocumentString(`
   productPrice
   productPrice
   productDescription
+  slug
   stock
   productImageCover {
     data {
@@ -1428,6 +1434,30 @@ export const ProductListDetailsFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductListDetails"}) as unknown as TypedDocumentString<ProductListDetailsFragment, unknown>;
+export const CategoriesGetDetailsDocument = new TypedDocumentString(`
+    query CategoriesGetDetails {
+  categories {
+    data {
+      attributes {
+        categoryName
+        products {
+          data {
+            attributes {
+              productImageCover {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CategoriesGetDetailsQuery, CategoriesGetDetailsQueryVariables>;
 export const CategoryProductsGetPaginatedListDocument = new TypedDocumentString(`
     query CategoryProductsGetPaginatedList($category: String!, $page: Int!) {
   products(
@@ -1501,6 +1531,7 @@ export const ProudctGetDetailsDocument = new TypedDocumentString(`
         productName
         productPrice
         stock
+        slug
         productDescription
         reviews {
           data {

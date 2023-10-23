@@ -3,6 +3,7 @@ fragment ProductDetails on Product {
 	productPrice
 	productPrice
 	productDescription
+	slug
 	stock
 	productImageCover {
 		data {

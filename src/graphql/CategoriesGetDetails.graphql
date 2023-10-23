@@ -1,0 +1,22 @@
+query CategoriesGetDetails {
+	categories {
+		data {
+			attributes {
+				categoryName
+				products {
+					data {
+						attributes {
+							productImageCover {
+								data {
+									attributes {
+										url
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -8,6 +8,7 @@ type ProductDetailsDescriptionProps = {
 	productDescription: string;
 	productPrice: number;
 	stock: boolean;
+	slug: string;
 };
 
 export const ProductDetailsDescription = ({
@@ -15,7 +16,13 @@ export const ProductDetailsDescription = ({
 	productDescription,
 	productPrice,
 	stock,
+	slug,
 }: ProductDetailsDescriptionProps) => {
+	async function addProductToCartAction() {
+		"use server";
+		console.log(slug);
+	}
+
 	return (
 		<>
 			<article className="flex w-full max-w-md flex-col gap-2 md:w-1/2">
@@ -32,18 +39,20 @@ export const ProductDetailsDescription = ({
 					<strong>Description: </strong>
 					<MDXRemote source={productDescription} />
 				</article>
-				{stock ? (
-					<button className="mt-3 h-14 w-80  rounded-xl bg-gradient-to-tr from-violet-500 to-sky-500 px-4 py-3 font-bold text-white transition-all duration-200 ease-in-out  hover:scale-95 dark:from-violet-700 dark:to-sky-700">
-						Add to Cart
-					</button>
-				) : (
-					<button
-						disabled
-						className="mt-3 h-14 w-80 rounded-xl bg-gradient-to-tr from-violet-500 to-sky-500 px-4 py-3 font-bold text-white opacity-50  transition-all  duration-200 ease-in-out  dark:from-violet-700 dark:to-sky-700"
-					>
-						Out of stock
-					</button>
-				)}
+				<form action={addProductToCartAction}>
+					{stock ? (
+						<button className="mt-3 h-14 w-80  rounded-xl bg-gradient-to-tr from-violet-500 to-sky-500 px-4 py-3 font-bold text-white transition-all duration-200 ease-in-out  hover:scale-95 dark:from-violet-700 dark:to-sky-700">
+							Add to Cart
+						</button>
+					) : (
+						<button
+							disabled
+							className="mt-3 h-14 w-80 rounded-xl bg-gradient-to-tr from-violet-500 to-sky-500 px-4 py-3 font-bold text-white opacity-50  transition-all  duration-200 ease-in-out  dark:from-violet-700 dark:to-sky-700"
+						>
+							Out of stock
+						</button>
+					)}
+				</form>
 			</article>
 		</>
 	);
